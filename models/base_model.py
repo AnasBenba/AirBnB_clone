@@ -1,15 +1,29 @@
 #!/usr/bin/python3
-
+"""class BaseModel that defines all common
+attributes/methods for other classes"""
 import uuid
 import datetime
 import os
 
+
 class BaseModel():
 
-    def __init__(self):
-        self.id = str(uuid.uuid4())
-        self.created_at = self._created_at()
-        self.updated_at = datetime.datetime.now()
+    def __init__(self, *args, **kwargs):
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == 'id':
+                    setattr(self, key, str(value))
+                elif key == 'created_at' or key == 'updated_at':
+                    setattr(self, key, datetime.datetime.fromisoformat(value))
+                elif key == '__class__':
+                    pass
+                else:
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = self._created_at()
+            self.updated_at = datetime.datetime.now()
+            models.storage.new(self)
 
     def _created_at(self):
         """
@@ -39,6 +53,7 @@ class BaseModel():
         Updates the `updated_at` timestamp to the current time.
         """
         self.updated_at = datetime.datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """
