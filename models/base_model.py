@@ -21,26 +21,9 @@ class BaseModel():
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
-            self.created_at = self._created_at()
-            self.updated_at = datetime.datetime.now()
-            models.storage.new(self)
-
-    def _created_at(self):
-        """
-        Helper method to retrieve or create the timestamp for object creation.
-        """
-        created_file = "created_at.txt"
-
-        if os.path.exists(created_file):
-            with open(created_file, 'r') as file:
-                created_at = file.read()
-            if created_at:
-                return datetime.datetime.fromisoformat(created_at)
-        else:
-            created_at = datetime.datetime.now()
-            with open(created_file, 'w') as file:
-                file.write(created_at.isoformat())
-            return created_at
+            self.created_at = datetime.datetime.now()
+            self.updated_at = self.created_at
+            #models.storage.new(self)
 
     def __str__(self):
         """
@@ -53,7 +36,7 @@ class BaseModel():
         Updates the `updated_at` timestamp to the current time.
         """
         self.updated_at = datetime.datetime.now()
-        models.storage.save()
+        #models.storage.save()
 
     def to_dict(self):
         """
@@ -62,7 +45,8 @@ class BaseModel():
         Returns:
             dict: Dictionary containing the object's attributes and values.
         """
-        self.__dict__['__class__'] = self.__class__.__name__
-        self.__dict__['created_at'] = self.created_at.isoformat()
-        self.__dict__['updated_at'] = self.updated_at.isoformat()
-        return self.__dict__
+        my_dict = self.__dict__.copy()
+        my_dict['__class__'] = self.__class__.__name__
+        my_dict['created_at'] = self.created_at.isoformat()
+        my_dict['updated_at'] = self.updated_at.isoformat()
+        return my_dict
