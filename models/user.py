@@ -8,6 +8,7 @@ class User(BaseModel):
     """subclass of BaseModel"""
 
     def __init__(self):
+        super().__init__()
         self.email = ''
         self.password = ''
         self.first_name = ''
