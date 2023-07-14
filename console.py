@@ -61,7 +61,7 @@ an instance based on the class name and id\n"""
                     print("** no instance found **")
                 else:
                     del storage.all()[instance]
-                    storage.save
+                    storage.save()
 
     def do_all(self, line):
         """Prints all string representation of all instances
@@ -79,6 +79,29 @@ based or not on the class name\n"""
                     if type(value).__name__ == line:
                         list.append(str(value))
                 print(list)
+
+    def do_update(self, line):
+        """Updates an instance based on the class name and id
+by adding or updating attribute\n"""
+        if line is None or line == "":
+            print("** class name missing **")
+        else:
+            lines = line.split(' ')
+            if lines[0] not in storage.classes():
+                print("** class doesn't exist **")
+            elif len(lines) < 2:
+                print("** instance id missing **")
+            else:
+                instance = f"{lines[0]}.{lines[1]}"
+                if instance not in storage.all():
+                    print("** no instance found **")
+                elif len(lines) < 3:
+                    print("** attribute name missing **")
+                elif len(lines) < 4:
+                    print("** value missing **")
+                else:
+                    setattr(storage.all()[instance], lines[2], lines[3])
+                    storage.save()
 
     def do_EOF(self, line):
         """Handle the End-of-File (EOF) character.\n"""
