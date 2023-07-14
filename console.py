@@ -92,16 +92,23 @@ by adding or updating attribute\n"""
             elif len(lines) < 2:
                 print("** instance id missing **")
             else:
-                instance = f"{lines[0]}.{lines[1]}"
-                if instance not in storage.all():
+                inst = f"{lines[0]}.{lines[1]}"
+                if inst not in storage.all():
                     print("** no instance found **")
                 elif len(lines) < 3:
                     print("** attribute name missing **")
                 elif len(lines) < 4:
                     print("** value missing **")
                 else:
-                    setattr(storage.all()[instance], lines[2], lines[3])
-                    storage.save()
+                    if lines[2] in storage.check_class()[lines[0]]:
+                        t = type(storage.check_class()[lines[0]][lines[2]])
+                        try:
+                            setattr(storage.all()[inst], lines[2], t(lines[3]))
+                        except ValueError:
+                            pass
+                        except TypeError:
+                            pass
+                        storage.save()
 
     def do_EOF(self, line):
         """Handle the End-of-File (EOF) character.\n"""
