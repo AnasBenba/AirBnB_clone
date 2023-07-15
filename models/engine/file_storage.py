@@ -58,6 +58,7 @@ class FileStorage:
         return classes
 
     def check_class(self):
+        """Returns a dictionary of valid classes and their attributes"""
         attr = {
             "BaseModel": {
                 "id": "",
