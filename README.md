@@ -1,6 +1,6 @@
 # AirBnB Clone - The Console
 
-![AirBnB clone](https://mma.prnewswire.com/media/1121685/Airbnb_Logo.jpg?p=publish)
+![AirBnB clone](./Airbnb_Logo.jpg)
 
 ## Description
 
