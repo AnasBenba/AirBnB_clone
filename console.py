@@ -73,7 +73,9 @@ an instance based on the class name and id\n"""
                     storage.save()
 
     def precmd(self, line):
-        "retrieve all instances of a class by using: <class name>.all()"
+        """"retrieve all instances of a class by using: <class name>.all()"""
+        """retrieve an instance based on its ID: <class name>.show(<id>)"""
+        """destroy an instance based on his ID: <class name>.destroy(<id>)"""
         if '.' in line:
             line = line.replace('.', ' ')
             if '(' or ')' in line:
@@ -82,7 +84,6 @@ an instance based on the class name and id\n"""
                 line = line.replace('"', ' ')
             line = line.split(' ')
             if len(line) > 2:
-                line[2] = line[2].rstrip()
                 line = f"{line[1]} {line[0]} {line[2]}"
             else:
                 line = f"{line[1]} {line[0]}"
