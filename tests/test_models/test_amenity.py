@@ -78,6 +78,7 @@ class TestAmenity(unittest.TestCase):
         amenity = Amenity(None)
         self.assertNotIn(None, amenity.__dict__.values())
 
+
 class TestAmenity_save(unittest.TestCase):
     """Unittests for testing save method of the Amenity class."""
 
@@ -127,6 +128,7 @@ class TestAmenity_save(unittest.TestCase):
         amenity = Amenity()
         with self.assertRaises(TypeError):
             amenity.save(None)
+
 
 class TestAmenity_to_dict(unittest.TestCase):
     """Unittests for testing to_dict method of the Amenity class."""
