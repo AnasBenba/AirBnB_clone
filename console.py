@@ -71,6 +71,8 @@ based or not on the class name\n"""
             line = line.replace('.', ' ')
             if '(' or ')' in line:
                 line = line.replace('(', '').replace(')', '')
+            line = line.split(' ')
+            line = f"{line[1]} {line[0]}"
         list = []
         if line == "" or line is None:
             for key, value in storage.all().items():
