@@ -87,43 +87,36 @@ by adding or updating attribute\n"""
         if line is None or line == "":
             print("** class name missing **")
         else:
-            args = line.split()
-            if args[0] not in storage.classes():
+            a = line.split(' ')
+            if a[0] not in storage.classes():
                 print("** class doesn't exist **")
-            elif len(args) < 2:
+            elif len(a) < 2:
                 print("** instance id missing **")
             else:
-                inst = f"{args[0]}.{args[1]}"
+                inst = f"{a[0]}.{a[1]}"
                 if inst not in storage.all():
                     print("** no instance found **")
-                elif len(args) < 3:
+                elif len(a) < 3:
                     print("** attribute name missing **")
-                elif len(args) < 4:
+                elif len(a) < 4:
                     print("** value missing **")
                 else:
-                    d = storage.all()
-                    for i in range(len(args[1:]) + 1):
-                        if args[i][0] == '"':
-                            args[i] = args[i].replace('"', "")
-                    key = args[0] + '.' + args[1]
-                    attr_k = args[2]
-                    attr_v = args[3]
-                    try:
-                        if attr_v.isdigit():
-                            attr_v = int(attr_v)
-                        elif float(attr_v):
-                            attr_v = float(attr_v)
-                    except ValueError:
-                        pass
-                    class_attr = type(d[key]).__dict__
-                    if attr_k in class_attr.keys():
-                        try:
-                            attr_v = type(class_attr[attr_k])(attr_v)
-                        except Exception:
-                            print("Entered wrong value type")
-                            return
-                    setattr(d[key], attr_k, attr_v)
-                    storage.save()
+                    if a[0] == "BaseModel":
+                        if '"' in a[3]:
+                            a[3] = ast.literal_eval(a[3])
+                        setattr(storage.all()[inst], a[2], a[3])
+                        storage.save()
+                    else:
+                        if a[2] in storage.check_class()[a[0]]:
+                            a[3] = ast.literal_eval(a[3])
+                            t = type(storage.check_class()[a[0]][a[2]])
+                            try:
+                                setattr(storage.all()[inst], a[2], t(a[3]))
+                            except ValueError:
+                                pass
+                            except TypeError:
+                                pass
+                            storage.save()
 
     def do_EOF(self, line):
         """Handle the End-of-File (EOF) character.\n"""
