@@ -67,6 +67,10 @@ an instance based on the class name and id\n"""
     def do_all(self, line):
         """Prints all string representation of all instances
 based or not on the class name\n"""
+        if '.' in line:
+            line = line.replace('.', ' ')
+            if '(' or ')' in line:
+                line = line.replace('(', '').replace(')', '')
         list = []
         if line == "" or line is None:
             for key, value in storage.all().items():
