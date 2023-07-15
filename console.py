@@ -4,6 +4,7 @@ the entry point of the command interpreter"""
 import cmd
 from models.base_model import BaseModel
 from models import storage
+import ast
 
 
 class HBNBCommand(cmd.Cmd):
@@ -102,13 +103,12 @@ by adding or updating attribute\n"""
                 else:
                     if a[0] == "BaseModel":
                         if '"' in a[3]:
-                            a[3] = a[3].replace('"', '')
+                            a[3] = ast.literal_eval(a[3])
                         setattr(storage.all()[inst], a[2], a[3])
                         storage.save()
                     else:
                         if a[2] in storage.check_class()[a[0]]:
-                            if '"' in a[3]:
-                                a[3] = a[3].replace('"', '')
+                            a[3] = ast.literal_eval(a[3])
                             t = type(storage.check_class()[a[0]][a[2]])
                             try:
                                 setattr(storage.all()[inst], a[2], t(a[3]))
