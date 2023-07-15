@@ -46,16 +46,16 @@ The console supports the following commands:
 
 | File | Description |
 | ---- | ----------- |
-| `console.py` | The console |
-| `models/base_model.py` | The BaseModel class |
-| `models/engine/file_storage.py` | The FileStorage class |
-| `models/__init__.py` | The init file |
-| `models/amenity.py` | The Amenity class |
-| `models/city.py` | The City class |
-| `models/place.py` | The Place class |
-| `models/review.py` | The Review class |
-| `models/state.py` | The State class |
-| `models/user.py` | The User class |
+| [`console.py`](./console.py) | The console |
+| [`models/base_model.py`](./models/base_model.py) | The BaseModel class |
+| [`models/engine/file_storage.py`](./models/engine/file_storage.py) | The FileStorage class |
+| [`models/__init__.py`](./models/__init__.py) | The init file |
+| [`models/amenity.py`](./models/amenity.py) | The Amenity class |
+| [`models/city.py`](./models/city.py) | The City class |
+| [`models/place.py`](./models/place.py) | The Place class |
+| [`models/review.py`](./models/review.py) | The Review class |
+| [`models/state.py`](./models/state.py) | The State class |
+| [`models/user.py`](./models/user.py) | The User class |
 
 ## Examples
 
