@@ -15,6 +15,14 @@ class HBNBCommand(cmd.Cmd):
         """Exit the program\n"""
         return True
 
+    def do_count(self, class_name):
+        """retrieve the number of instances of a class: <class name>.count()"""
+        count = 0
+        for obj in storage.all().values():
+            if obj.__class__.__name__ == class_name:
+                count += 1
+        print(count)
+
     def do_create(self, line):
         """Creates an instance\n"""
         classes = storage.classes()
