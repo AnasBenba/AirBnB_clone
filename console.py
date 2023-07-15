@@ -64,15 +64,19 @@ an instance based on the class name and id\n"""
                     del storage.all()[instance]
                     storage.save()
 
-    def do_all(self, line):
-        """Prints all string representation of all instances
-based or not on the class name\n"""
+    def precmd(self, line):
+        "retrieve all instances of a class by using: <class name>.all()"
         if '.' in line:
             line = line.replace('.', ' ')
             if '(' or ')' in line:
                 line = line.replace('(', '').replace(')', '')
             line = line.split(' ')
             line = f"{line[1]} {line[0]}"
+        return cmd.Cmd.precmd(self, line)
+
+    def do_all(self, line):
+        """Prints all string representation of all instances
+based or not on the class name\n"""
         list = []
         if line == "" or line is None:
             for key, value in storage.all().items():
