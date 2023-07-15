@@ -14,12 +14,17 @@ The console is a command line interpreter that permits management of the AirBnB 
 * Update attributes of an object
 * Destroy an object
 
-## Installation
+## How to start it
 
 To use the console you have to clone the repository in your local machine:
 ```
 git clone https://github.com/AnasBenba/AirBnB_clone.git
 ```
+After cloning the repository, you have to execute the file console.py in the following way:
+```
+./console.py
+```
+
 ## How to use it
 
 The console works in interactive and non-interactive mode, like the Unix shell. To start the console in non-interactive mode, you have to execute the file console.py in the following way:
