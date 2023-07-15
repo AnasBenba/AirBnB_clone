@@ -27,14 +27,9 @@ class FileStorage:
         """
         Serialize objects from FileStorage and save them to a JSON file
         """
-        obj = {}
-        for key, value in FileStorage.__objects.items():
-            if isinstance(value, dict):
-                obj[key] = value
-            else:
-                obj[key] = value.to_dict()
-        with open(FileStorage.__file_path, 'w') as file:
-            json.dump(obj, file)
+        with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
+            d = {k: v.to_dict() for k, v in FileStorage.__objects.items()}
+            json.dump(d, f)
 
     def classes(self):
         """Returns a dictionary of valid classes and their references"""
@@ -110,8 +105,13 @@ class FileStorage:
         try:
             with open(FileStorage.__file_path, 'r') as file:
                 obj = json.load(file)
-                obj = {k: self.classes()[v["__class__"]](**v)
-                       for k, v in obj.items()}
+            new_obj = {}
+            for key, value in obj.items():
+                class_name = value['__class__']
+                cls = self.classes()[class_name]
+                instance = cls(**value)
+                new_obj[key] = instance
+            obj = new_obj
             FileStorage.__objects = obj
         except FileNotFoundError:
             pass
