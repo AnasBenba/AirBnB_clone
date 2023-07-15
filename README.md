@@ -79,3 +79,6 @@ f0b0e9d8-aea5-4b2e-9a4a-0b9b8d6a6a1c
 []
 (hbnb) quit
 ```
+## Authors
+
+See [AUTHORS](./AUTHORS) file for more information.
