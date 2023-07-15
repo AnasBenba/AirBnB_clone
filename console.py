@@ -111,12 +111,11 @@ by adding or updating attribute\n"""
                             a[3] = ast.literal_eval(a[3])
                             t = type(storage.check_class()[a[0]][a[2]])
                             try:
-                                setattr(storage.all()[inst], a[2], t(a[3]))
-                            except ValueError:
-                                pass
-                            except TypeError:
-                                pass
-                            storage.save()
+                                a[3] = t(a[3])
+                            except Exception:
+                                return
+                        setattr(storage.all()[inst], a[2], a[3])
+                        storage.save()
 
     def do_EOF(self, line):
         """Handle the End-of-File (EOF) character.\n"""
