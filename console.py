@@ -108,8 +108,8 @@ by adding or updating attribute\n"""
                             a[3] = t(a[3])
                         except Exception:
                             return
-                    setattr(storage.all()[inst], a[2], a[3])
-                    storage.save()
+                        setattr(storage.all()[inst], a[2], a[3])
+                        storage.save()
 
     def do_EOF(self, line):
         """Handle the End-of-File (EOF) character.\n"""
