@@ -112,6 +112,7 @@ by adding or updating attribute\n"""
 
     def do_EOF(self, line):
         """Handle the End-of-File (EOF) character.\n"""
+        print()
         return True
 
     def emptyline(self):
