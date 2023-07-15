@@ -78,8 +78,14 @@ an instance based on the class name and id\n"""
             line = line.replace('.', ' ')
             if '(' or ')' in line:
                 line = line.replace('(', '').replace(')', '')
+            if '"' in line:
+                line = line.replace('"', ' ')
             line = line.split(' ')
-            line = f"{line[1]} {line[0]}"
+            if len(line) > 2:
+                line[2] = line[2].rstrip()
+                line = f"{line[1]} {line[0]} {line[2]}"
+            else:
+                line = f"{line[1]} {line[0]}"
         return cmd.Cmd.precmd(self, line)
 
     def do_all(self, line):
