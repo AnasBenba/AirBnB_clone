@@ -102,14 +102,14 @@ by adding or updating attribute\n"""
                     print("** value missing **")
                 else:
                     if a[2] in storage.check_class()[a[0]]:
-                        a[3] = ast.literal_eval(a[3])
+                        a[3] = a[3].replace('"', '')
                         t = type(storage.check_class()[a[0]][a[2]])
                         try:
                             a[3] = t(a[3])
                         except Exception:
                             return
-                        setattr(storage.all()[inst], a[2], a[3])
-                        storage.save()
+                    setattr(storage.all()[inst], a[2], a[3])
+                    storage.save()
 
     def do_EOF(self, line):
         """Handle the End-of-File (EOF) character.\n"""
