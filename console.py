@@ -32,13 +32,13 @@ an instance based on the class name and id\n"""
         if line is None or line == "":
             print("** class name missing **")
         else:
-            lines = line.split(' ')
-            if lines[0] not in storage.classes():
+            a = line.split(' ')
+            if a[0] not in storage.classes():
                 print("** class doesn't exist **")
-            elif len(lines) < 2:
+            elif len(a) < 2:
                 print("** instance id missing **")
             else:
-                instance = f"{lines[0]}.{lines[1]}"
+                instance = f"{a[0]}.{a[1]}"
                 if instance not in storage.all():
                     print("** no instance found **")
                 else:
@@ -50,13 +50,13 @@ an instance based on the class name and id\n"""
         if line is None or line == "":
             print("** class name missing **")
         else:
-            lines = line.split(' ')
-            if lines[0] not in storage.classes():
+            a = line.split(' ')
+            if a[0] not in storage.classes():
                 print("** class doesn't exist **")
-            elif len(lines) < 2:
+            elif len(a) < 2:
                 print("** instance id missing **")
             else:
-                instance = f"{lines[0]}.{lines[1]}"
+                instance = f"{a[0]}.{a[1]}"
                 if instance not in storage.all():
                     print("** no instance found **")
                 else:
@@ -86,32 +86,32 @@ by adding or updating attribute\n"""
         if line is None or line == "":
             print("** class name missing **")
         else:
-            lines = line.split(' ')
-            if lines[0] not in storage.classes():
+            a = line.split(' ')
+            if a[0] not in storage.classes():
                 print("** class doesn't exist **")
-            elif len(lines) < 2:
+            elif len(a) < 2:
                 print("** instance id missing **")
             else:
-                inst = f"{lines[0]}.{lines[1]}"
+                inst = f"{a[0]}.{a[1]}"
                 if inst not in storage.all():
                     print("** no instance found **")
-                elif len(lines) < 3:
+                elif len(a) < 3:
                     print("** attribute name missing **")
-                elif len(lines) < 4:
+                elif len(a) < 4:
                     print("** value missing **")
                 else:
-                    if lines[0] == "BaseModel":
-                        if '"' in lines[3]:
-                            lines[3] = lines[3].replace('"', '')
-                        setattr(storage.all()[inst], lines[2], lines[3])
+                    if a[0] == "BaseModel":
+                        if '"' in a[3]:
+                            a[3] = a[3].replace('"', '')
+                        setattr(storage.all()[inst], a[2], a[3])
                         storage.save()
                     else:
-                        if lines[2] in storage.check_class()[lines[0]]:
-                            if '"' in lines[3]:
-                                lines[3] = lines[3].replace('"', '')
-                            t = type(storage.check_class()[lines[0]][lines[2]])
+                        if a[2] in storage.check_class()[a[0]]:
+                            if '"' in a[3]:
+                                a[3] = a[3].replace('"', '')
+                            t = type(storage.check_class()[a[0]][a[2]])
                             try:
-                                setattr(storage.all()[inst], lines[2], t(lines[3]))
+                                setattr(storage.all()[inst], a[2], t(a[3]))
                             except ValueError:
                                 pass
                             except TypeError:
@@ -125,7 +125,7 @@ by adding or updating attribute\n"""
 
     def emptyline(self):
 
-        """Ignore empty lines."""
+        """Ignore empty a."""
         pass
 
 
