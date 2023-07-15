@@ -100,15 +100,23 @@ by adding or updating attribute\n"""
                 elif len(lines) < 4:
                     print("** value missing **")
                 else:
-                    if lines[2] in storage.check_class()[lines[0]]:
-                        t = type(storage.check_class()[lines[0]][lines[2]])
-                        try:
-                            setattr(storage.all()[inst], lines[2], t(lines[3]))
-                        except ValueError:
-                            pass
-                        except TypeError:
-                            pass
+                    if lines[0] == "BaseModel":
+                        if '"' in lines[3]:
+                            lines[3] = lines[3].replace('"', '')
+                        setattr(storage.all()[inst], lines[2], lines[3])
                         storage.save()
+                    else:
+                        if lines[2] in storage.check_class()[lines[0]]:
+                            if '"' in lines[3]:
+                                lines[3] = lines[3].replace('"', '')
+                            t = type(storage.check_class()[lines[0]][lines[2]])
+                            try:
+                                setattr(storage.all()[inst], lines[2], t(lines[3]))
+                            except ValueError:
+                                pass
+                            except TypeError:
+                                pass
+                            storage.save()
 
     def do_EOF(self, line):
         """Handle the End-of-File (EOF) character.\n"""
