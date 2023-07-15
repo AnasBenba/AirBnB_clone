@@ -1,6 +1,6 @@
 # AirBnB Clone - The Console
 
-![AirBnB clone](https://www.prnewswire.com/news-releases/airbnb-announces-pricing-of-initial-public-offering-301190081.html)
+![AirBnB clone](https://mma.prnewswire.com/media/1121685/Airbnb_Logo.jpg?p=publish)
 
 ## Description
 
