@@ -80,8 +80,6 @@ an instance based on the class name and id\n"""
         """update an instance based on his ID:
         <class name>.update(<id>, <attribute name>, <attribute value>)"""
         """non-intractive mode"""
-        if not sys.stdin.isatty():
-            print()
         if '.' in line:
             line = line.replace('.', ' ')
             if '(' or ')' in line:
