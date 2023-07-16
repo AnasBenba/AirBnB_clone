@@ -76,17 +76,24 @@ an instance based on the class name and id\n"""
         """"retrieve all instances of a class by using: <class name>.all()"""
         """retrieve an instance based on its ID: <class name>.show(<id>)"""
         """destroy an instance based on his ID: <class name>.destroy(<id>)"""
+        """update an instance based on his ID:
+        <class name>.update(<id>, <attribute name>, <attribute value>)"""
         if '.' in line:
             line = line.replace('.', ' ')
             if '(' or ')' in line:
-                line = line.replace('(', '').replace(')', '')
+                line = line.replace('(', ' ').replace(')', '')
             if '"' in line:
-                line = line.replace('"', ' ')
-            line = line.split(' ')
-            if len(line) > 2:
-                line = f"{line[1]} {line[0]} {line[2]}"
+                line = line.replace('"', '')
+            if ',' in line:
+                line = line.replace(',', '')
+            if len(line.split()) > 4:
+                line = line.split()
+                line = f"{line[1]} {line[0]} {line[2]} {line[3]} {line[4]}"
+            elif len(line.split()) > 2:
+                line = f"{line.split()[1]} {line.split()[0]} {line.split()[2]}"
             else:
-                line = f"{line[1]} {line[0]}"
+                line = f"{line.split()[1]} {line.split()[0]}"
+            return cmd.Cmd.precmd(self, line)
         return cmd.Cmd.precmd(self, line)
 
     def do_all(self, line):
