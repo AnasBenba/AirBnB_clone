@@ -5,6 +5,7 @@ import cmd
 from models.base_model import BaseModel
 from models import storage
 import ast
+import sys
 
 
 class HBNBCommand(cmd.Cmd):
@@ -78,6 +79,9 @@ an instance based on the class name and id\n"""
         """destroy an instance based on his ID: <class name>.destroy(<id>)"""
         """update an instance based on his ID:
         <class name>.update(<id>, <attribute name>, <attribute value>)"""
+        """non-intractive mode"""
+        if not sys.stdin.isatty():
+            print()
         if '.' in line:
             line = line.replace('.', ' ')
             if '(' or ')' in line:
